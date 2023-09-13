@@ -4,13 +4,13 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   current: null,
   items: {
-    laces: '#ffffff',
+    laces: '#ff0000',
     mesh: '#ffffff',
     caps: '#ffffff',
     inner: '#ffffff',
     sole: '#ffffff',
     stripes: '#ffffff',
-    band: '#ffffff',
+    band: '#ff0000',
     patch: '#ffffff',
   },
 };

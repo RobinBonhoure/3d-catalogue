@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 function lerp(v0, v1, t) {
   return v0 * (1 - t) + v1 * t
 }
+
 let dragRotation = { x: 0, y: 0 }
 
 function Shoe() {
@@ -28,11 +29,18 @@ function Shoe() {
     ref.current.position.y = (1 + Math.sin(t / 1.5)) / 10
   })
 
-  const dragBind = useDrag(({ offset: [x, y] }) => {
-    console.log("dragging")
-    dragRotation.x = y / 100;
-    dragRotation.y = x / 100;
-  });
+  const [isDragging, setIsDragging] = useState(false)
+  const dragBind = useDrag(({ offset: [x, y], down }) => {
+    if (down) {
+      dragRotation.x = y / 100;
+      dragRotation.y = x / 100;
+      setIsDragging(true);
+    } else {
+      setIsDragging(false);
+    }
+  },
+    { filterTaps: true }
+  );
 
   return (
     <group
@@ -41,7 +49,8 @@ function Shoe() {
       onPointerOver={(e) => (e.stopPropagation(), set(e.object.material.name))}
       onPointerOut={(e) => e.intersections.length === 0 && set(null)}
       onPointerMissed={() => (dispatch(setCurrent(null)))}
-      onClick={(e) => (e.stopPropagation(), dispatch(setCurrent(e.object.material.name)))}
+      onPointerDown={(e) => (e.stopPropagation(), console.log(dragRotation.x))}
+      onClick={(e) => (e.stopPropagation(), !isDragging && dispatch(setCurrent(e.object.material.name)))}
       {...dragBind()}
     >
       <mesh geometry={nodes.shoe.geometry} material={materials.laces} material-color={useSelector((state) => state.app.items.laces)} />

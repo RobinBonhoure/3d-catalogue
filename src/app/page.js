@@ -2,8 +2,8 @@
 
 import React, { useRef, useEffect, Suspense, useState } from 'react';
 import { setCurrent, setItemColor } from '../redux/appSlice';
-import { Canvas, useFrame, Environment } from "@react-three/fiber"
-import { ContactShadows, useGLTF } from "@react-three/drei"
+import { Canvas, useFrame } from "@react-three/fiber"
+import { ContactShadows, useGLTF, Environment } from "@react-three/drei"
 import { useDrag } from 'react-use-gesture';
 import { HexColorPicker } from "react-colorful"
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,11 +11,11 @@ import { useSelector, useDispatch } from 'react-redux';
 function lerp(v0, v1, t) {
   return v0 * (1 - t) + v1 * t
 }
+let dragRotation = { x: 0, y: 0 }
 
 function Shoe() {
   const ref = useRef()
   const [hovered, set] = useState(null)
-  let dragRotation = { x: 0, y: 0 }
   const dispatch = useDispatch();
 
   const { nodes, materials } = useGLTF("shoe-draco.glb")
@@ -29,6 +29,7 @@ function Shoe() {
   })
 
   const dragBind = useDrag(({ offset: [x, y] }) => {
+    console.log("dragging")
     dragRotation.x = y / 100;
     dragRotation.y = x / 100;
   });
@@ -37,11 +38,11 @@ function Shoe() {
     <group
       ref={ref}
       dispose={null}
-      {...dragBind()}
       onPointerOver={(e) => (e.stopPropagation(), set(e.object.material.name))}
       onPointerOut={(e) => e.intersections.length === 0 && set(null)}
       onPointerMissed={() => (dispatch(setCurrent(null)))}
-      onPointerDown={(e) => (e.stopPropagation(), dispatch(setCurrent(e.object.material.name)))}
+      onClick={(e) => (e.stopPropagation(), dispatch(setCurrent(e.object.material.name)))}
+      {...dragBind()}
     >
       <mesh geometry={nodes.shoe.geometry} material={materials.laces} material-color={useSelector((state) => state.app.items.laces)} />
       <mesh geometry={nodes.shoe_1.geometry} material={materials.mesh} material-color={useSelector((state) => state.app.items.mesh)} />
@@ -71,12 +72,13 @@ export default function App() {
     <>
       <div className="canvas-container">
         <Picker />
-        <Canvas pixelratio={[1, 1.5]} camera={{ position: [0, 0, 2.75] }}>
+        <Canvas pixelratio={[1, 1.5]} camera={{ position: [0, 0.5, 2.75] }}>
           <ambientLight intensity={0.3} />
           <spotLight intensity={0.3} angle={0.1} penumbra={1} position={[5, 25, 20]} />
           <Suspense fallback={null}>
             <Shoe />
-            <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.8, 0]} opacity={0.25} width={10} height={10} blur={2} far={1} />
+            <Environment files="royal_esplanade_1k.hdr" />
+            <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.8, 0]} opacity={0.3} width={1} height={1} blur={2} far={1} />
           </Suspense>
         </Canvas>
       </div>

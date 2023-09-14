@@ -18,12 +18,39 @@ export default function Shoe() {
     const dispatch = useDispatch();
     const { nodes, materials } = useGLTF("shoe-draco.glb")
 
-    // Load an occlusion map
-    const aoMap = useLoader(TextureLoader, 'materials/wood/Substance_Graph_AmbientOcclusion.jpg')
-    const roughnessMap = useLoader(TextureLoader, 'materials/wood/Substance_Graph_Roughness.jpg')
-    const displacementMap = useLoader(TextureLoader, 'materials/wood/Substance_Graph_Height.jpg')
-    const normalMap = useLoader(TextureLoader, 'materials/wood/Substance_Graph_Normal.jpg')
-    const baseColorMap = useLoader(TextureLoader, 'materials/wood/Substance_Graph_BaseColor.jpg')
+    // WOOD MATERIAL
+    const aoMap = useLoader(TextureLoader, 'materials/wood/ambientOcclusion.jpg')
+    const roughnessMap = useLoader(TextureLoader, 'materials/wood/roughness.jpg')
+    const normalMap = useLoader(TextureLoader, 'materials/wood/normal.jpg')
+    const baseColorMap = useLoader(TextureLoader, 'materials/wood/baseColor.jpg')
+
+    // CLASSIC MATERIAL
+    // const aoMap = materials.mesh.aoMap
+    // const roughnessMap = useLoader(TextureLoader, 'materials/wood/roughness.jpg')
+    // const normalMap = useLoader(TextureLoader, 'materials/wood/normal.jpg')
+    // const baseColorMap = useLoader(TextureLoader, 'materials/wood/baseColor.jpg')
+
+
+    // const actualMaterial = {
+
+    // }
+
+    // switch (choice) {
+    //     case 'laces':
+    //         materials.laces.color = useSelector((state) => state.app.items.laces)
+    //         break;
+    //     case 'mesh':
+    //         materials.mesh.color = useSelector((state) => state.app.items.mesh)
+    //         break;
+    //     case 'caps':
+    //         materials.caps.color = useSelector((state) => state.app.items.caps)
+    //         break;
+    //     default:
+    //         break;
+    // }
+
+
+
 
     //   // Load a displacement map
     //   const displacementMap = TextureLoader.load('path/to/displacementMap.jpg');
@@ -33,10 +60,12 @@ export default function Shoe() {
 
 
     useEffect(() => {
-        materials.mesh.aoMap = aoMap
-        materials.mesh.roughnessMap = roughnessMap
-        materials.mesh.normalMap = normalMap
-        materials.mesh.map = baseColorMap
+        // Object.values(materials).forEach(material => {
+        //     material.map = baseColorMap
+        //     material.aoMap = aoMap
+        //     material.roughnessMap = roughnessMap
+        //     material.normalMap = normalMap
+        // });
     })
 
 
@@ -53,7 +82,6 @@ export default function Shoe() {
         ref.current.rotation.x = lerp(ref.current.rotation.x, Math.cos(t / 4) / 8 + dragRotation.x, 0.1)
         ref.current.rotation.y = lerp(ref.current.rotation.y, Math.sin(t / 4) / 8 + dragRotation.y, 0.1)
         ref.current.position.y = (1 + Math.sin(t / 1.5)) / 10
-        // ref.current.material.needsUpdate
     })
 
     const [isDragging, setIsDragging] = useState(false)

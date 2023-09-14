@@ -5,7 +5,7 @@ const initialState = {
   current: null,
   items: {
     laces: '#ff0000',
-    mesh: '#ffffff',
+    mesh: '',
     caps: '#ffffff',
     inner: '#ffffff',
     sole: '#ffffff',

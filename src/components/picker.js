@@ -2,22 +2,29 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { setItemColor } from '../redux/appSlice'
 import { HexColorPicker } from "react-colorful"
+import Materials from './materials';
 
 export default function Picker() {
     const dispatch = useDispatch();
     const target = useSelector((state) => state.app.current);
-    const items = useSelector((state) => state.app.items);
-  
+
     // Get the item object based on the target
-    const selectedItem = items[target] || {};
-  
-    // Get an array of property names from the selected item
-    const propertyNames = Object.keys(selectedItem);
+    const selectedItem = target || null;
+    const itemColor = useSelector((state) => state.app.items[target]?.color);
+
+    const handleColorChange = (color) => {
+        dispatch(setItemColor({ item: target, color }));
+    };
+
     return (
-        <div className='picker' style={{ display: target ? "block" : "none" }}>
-            {/* <HexColorPicker color={useSelector((state) => state.app.items[target])} onChange={(color) => dispatch(setItemColor({ item: target, color: color }))} /> */}
+        <div className="picker" style={{ display: target ? 'block' : 'none' }}>
+            <HexColorPicker color={itemColor} onChange={handleColorChange} />
             <h1>{target}</h1>
-            {useSelector((state) => state.app.items[target])}
+            {itemColor}
+
+            <div style={{ width: '100px', height: '100px' }}>
+                {selectedItem && <Materials part={selectedItem} />}
+            </div>
         </div>
     )
 }

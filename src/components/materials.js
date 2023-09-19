@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { Sphere, useCursor } from '@react-three/drei';
-import { useLoader } from "@react-three/fiber"
-import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import { Canvas } from '@react-three/fiber';
+
+import dataMaterials from '../data/dataMaterials';
 
 
 const partsMaterials = {
@@ -47,28 +47,13 @@ const partsMaterials = {
 
 export default function Materials({ part }) {
 
-
-    const materials = {
-        default: {
-            aoMap: useLoader(TextureLoader, 'materials/wood/ambientOcclusion.jpg'),
-            roughnessMap: useLoader(TextureLoader, 'materials/wood/roughness.jpg'),
-            normalMap: useLoader(TextureLoader, 'materials/wood/normal.jpg'),
-            baseColorMap: useLoader(TextureLoader, 'materials/wood/baseColor.jpg'),
-        },
-        wood: {
-            aoMap: useLoader(TextureLoader, 'materials/wood/ambientOcclusion.jpg'),
-            roughnessMap: useLoader(TextureLoader, 'materials/wood/roughness.jpg'),
-            normalMap: useLoader(TextureLoader, 'materials/wood/normal.jpg'),
-            baseColorMap: useLoader(TextureLoader, 'materials/wood/baseColor.jpg'),
-        },
-    }
+    const allMaterials = dataMaterials();
 
     const [hovered, setHovered] = useState(false);
     useCursor(hovered)
 
     // if (part === null) return null;
     const partMaterial = Object.keys(partsMaterials[part]).filter(key => partsMaterials[part][key]);
-    console.log(partMaterial);
 
     return (
         <>
@@ -85,10 +70,10 @@ export default function Materials({ part }) {
                         >
                             <meshPhongMaterial
                                 attach="material"
-                                aoMap={materials[material].aoMap}
-                                roughnessMap={materials[material].roughnessMap}
-                                normalMap={materials[material].normalMap}
-                                map={materials[material].baseColorMap}
+                                aoMap={allMaterials[material].aoMap}
+                                roughnessMap={allMaterials[material].roughnessMap}
+                                normalMap={allMaterials[material].normalMap}
+                                map={allMaterials[material].baseColorMap}
                             />
                         </Sphere>
                     </Canvas>

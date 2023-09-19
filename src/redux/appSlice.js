@@ -1,43 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// Define your dynamic item list
+const itemList = ['laces', 'mesh', 'caps', 'inner', 'sole', 'stripes', 'band', 'patch'];
+
+// Create an initial state object dynamically based on the item list
 const initialState = {
   current: null,
-  items: {
-    laces: {
+  items: itemList.reduce((itemsObj, item) => {
+    itemsObj[item] = {
       color: '',
-      material: '',
-    },
-    mesh: {
-      color: '',
-      material: '',
-    },
-    caps: {
-      color: '',
-      material: '',
-    },
-    inner: {
-      color: '',
-      material: '',
-    },
-    sole: {
-      color: '',
-      material: '',
-    },
-    stripes: {
-      color: '',
-      material: '',
-    },
-    band: {
-      color: '',
-      material: '',
-    },
-    patch: {
-      color: '',
-      material: '',
-    },
-  },
+      material: 'default',
+    };
+    return itemsObj;
+  }, {}),
 };
 
+// Create a reducer slice dynamically based on the item list
 const appSlice = createSlice({
   name: 'app',
   initialState,

@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useGLTF, useCursor } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 
+import dataMaterials from '../data/dataMaterials';
+
 function lerp(v0, v1, t) {
     return v0 * (1 - t) + v1 * t
 }
@@ -16,6 +18,7 @@ export default function Shoe() {
     const [hovered, set] = useState(null);
     const dispatch = useDispatch();
     const { nodes, materials } = useGLTF('shoe-draco.glb');
+    const allMaterials = dataMaterials();
     useCursor(hovered);
 
     useFrame((state) => {
@@ -61,6 +64,13 @@ export default function Shoe() {
         }
     };
 
+
+    // Object.keys(materials).forEach(element => {
+    //     materials[element].aoMap = allMaterials[useSelector((state) => state.app.items[element].material)].aoMap;
+    // });
+
+    console.log(allMaterials[useSelector((state) => state.app.items.mesh.material)].aoMap)
+
     return (
         <group
             ref={ref}
@@ -81,7 +91,10 @@ export default function Shoe() {
                 geometry={nodes.shoe_1.geometry}
                 material={materials.mesh}
                 material-color={useSelector((state) => state.app.items.mesh.color)}
-            />
+            >  
+            <meshStandardMaterial aoMap={allMaterials[useSelector((state) => state.app.items.mesh.material)].aoMap} />
+            </mesh>
+
             <mesh
                 geometry={nodes.shoe_2.geometry}
                 material={materials.caps}

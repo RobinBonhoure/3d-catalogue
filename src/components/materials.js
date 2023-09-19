@@ -3,41 +3,51 @@
 import { useState } from 'react';
 import { Sphere, useCursor } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import { useSelector, useDispatch } from 'react-redux'
+import { setItemMaterial } from '../redux/modelCustomizationSlice'
 
 import dataMaterials from '../data/dataMaterials';
 
 
 const partsMaterials = {
     mesh: {
-        default: true,
-        wood: false
+        metal: true,
+        fabric: true,
+        wood: true
     },
     laces: {
-        default: true,
+        metal: true,
+        fabric: true,
         wood: true
     },
     caps: {
-        default: true,
+        metal: true,
+        fabric: true,
         wood: true
     },
     inner: {
-        default: true,
+        metal: true,
+        fabric: true,
         wood: true
     },
     sole: {
-        default: true,
+        metal: true,
+        fabric: true,
         wood: true
     },
     stripes: {
-        default: true,
+        metal: true,
+        fabric: true,
         wood: true
     },
     band: {
-        default: true,
+        metal: true,
+        fabric: true,
         wood: true
     },
     patch: {
-        default: true,
+        metal: true,
+        fabric: true,
         wood: true
     },
 }
@@ -46,6 +56,18 @@ const partsMaterials = {
 
 
 export default function Materials({ part }) {
+
+    
+    const dispatch = useDispatch();
+    const target = useSelector((state) => state.modelCustomization.current);
+
+    // Get the item object based on the target
+    const selectedItem = target || null;
+    const itemMaterial = useSelector((state) => state.modelCustomization.items[target]?.material);
+
+    const handleMaterialChange = (material) => {
+        dispatch(setItemMaterial({ item: target, material }));
+    };
 
     const allMaterials = dataMaterials();
 
@@ -58,6 +80,7 @@ export default function Materials({ part }) {
     return (
         <>
             {partMaterial.map((material, index) => {
+                console.log(material)
                 return (
                     <Canvas key={index}>
                         <ambientLight intensity={0.5} />
@@ -66,14 +89,16 @@ export default function Materials({ part }) {
                             args={[2, 32, 32]}
                             onPointerOver={() => setHovered(true)}
                             onPointerOut={() => setHovered(false)}
+                            onClick={() => handleMaterialChange(material)}
                             position={[0, 0, 0]} // Adjust the position as needed
                         >
-                            <meshPhongMaterial
+                            <meshStandardMaterial
                                 attach="material"
                                 aoMap={allMaterials[material].aoMap}
                                 roughnessMap={allMaterials[material].roughnessMap}
                                 normalMap={allMaterials[material].normalMap}
                                 map={allMaterials[material].baseColorMap}
+                                metalnessMap={allMaterials[material].metalnessMap}
                             />
                         </Sphere>
                     </Canvas>

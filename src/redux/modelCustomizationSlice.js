@@ -9,15 +9,15 @@ const initialState = {
   items: itemList.reduce((itemsObj, item) => {
     itemsObj[item] = {
       color: '',
-      material: 'default',
+      material: 'wood',
     };
     return itemsObj;
   }, {}),
 };
 
 // Create a reducer slice dynamically based on the item list
-const appSlice = createSlice({
-  name: 'app',
+const modelCustomizationSlice = createSlice({
+  name: 'modelCustomization',
   initialState,
   reducers: {
     setCurrent: (state, action) => {
@@ -34,5 +34,5 @@ const appSlice = createSlice({
   },
 });
 
-export const { setCurrent, setItemColor, setItemMaterial } = appSlice.actions;
-export default appSlice.reducer;
+export const { setCurrent, setItemColor, setItemMaterial } = modelCustomizationSlice.actions;
+export default modelCustomizationSlice.reducer;

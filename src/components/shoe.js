@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react'
-import { setCurrent } from '../redux/appSlice'
+import React, { useRef, useState, useEffect } from 'react'
+import { setCurrent } from '../redux/modelCustomizationSlice'
+import { setAOMapMaterial } from '../redux/materialsSlice';
 import { useDrag } from 'react-use-gesture'
 import { useSelector, useDispatch } from 'react-redux'
 import { useGLTF, useCursor } from "@react-three/drei"
@@ -20,6 +21,8 @@ export default function Shoe() {
     const { nodes, materials } = useGLTF('shoe-draco.glb');
     const allMaterials = dataMaterials();
     useCursor(hovered);
+
+    console.log(materials);
 
     useFrame((state) => {
         const t = state.clock.getElapsedTime();
@@ -66,10 +69,8 @@ export default function Shoe() {
 
 
     // Object.keys(materials).forEach(element => {
-    //     materials[element].aoMap = allMaterials[useSelector((state) => state.app.items[element].material)].aoMap;
+    //     materials[element].aoMap = allMaterials[useSelector((state) => state.modelCustomization.items[element].material)].aoMap;
     // });
-
-    console.log(allMaterials[useSelector((state) => state.app.items.mesh.material)].aoMap)
 
     return (
         <group
@@ -85,45 +86,50 @@ export default function Shoe() {
             <mesh
                 geometry={nodes.shoe.geometry}
                 material={materials.laces}
-                material-color={useSelector((state) => state.app.items.laces.color)}
+                material-color={useSelector((state) => state.modelCustomization.items.laces.color)}
             />
             <mesh
                 geometry={nodes.shoe_1.geometry}
                 material={materials.mesh}
-                material-color={useSelector((state) => state.app.items.mesh.color)}
-            >  
-            <meshStandardMaterial aoMap={allMaterials[useSelector((state) => state.app.items.mesh.material)].aoMap} />
-            </mesh>
-
+                material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.mesh.material)].aoMap}
+                material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.mesh.material)].roughnessMap}
+                material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.mesh.material)].normalMap}
+                material-map={allMaterials[useSelector((state) => state.modelCustomization.items.mesh.material)].baseColorMap}
+                // material-color={useSelector((state) => state.modelCustomization.items.mesh.color)}
+            />
             <mesh
                 geometry={nodes.shoe_2.geometry}
                 material={materials.caps}
-                material-color={useSelector((state) => state.app.items.caps.color)}
+                material-color={useSelector((state) => state.modelCustomization.items.caps.color)}
             />
             <mesh
                 geometry={nodes.shoe_3.geometry}
                 material={materials.inner}
-                material-color={useSelector((state) => state.app.items.inner.color)}
+                material-color={useSelector((state) => state.modelCustomization.items.inner.color)}
             />
             <mesh
                 geometry={nodes.shoe_4.geometry}
                 material={materials.sole}
-                material-color={useSelector((state) => state.app.items.sole.color)}
+                material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.sole.material)].aoMap}
+                material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.sole.material)].roughnessMap}
+                material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.sole.material)].normalMap}
+                material-map={allMaterials[useSelector((state) => state.modelCustomization.items.sole.material)].baseColorMap}
+                // material-color={useSelector((state) => state.modelCustomization.items.sole.color)}
             />
             <mesh
                 geometry={nodes.shoe_5.geometry}
                 material={materials.stripes}
-                material-color={useSelector((state) => state.app.items.stripes.color)}
+                material-color={useSelector((state) => state.modelCustomization.items.stripes.color)}
             />
             <mesh
                 geometry={nodes.shoe_6.geometry}
                 material={materials.band}
-                material-color={useSelector((state) => state.app.items.band.color)}
+                material-color={useSelector((state) => state.modelCustomization.items.band.color)}
             />
             <mesh
                 geometry={nodes.shoe_7.geometry}
                 material={materials.patch}
-                material-color={useSelector((state) => state.app.items.patch.color)}
+                material-color={useSelector((state) => state.modelCustomization.items.patch.color)}
             />
         </group>
     );

@@ -9,6 +9,34 @@
 .picker {
     position: fixed;
     z-index: 1;
-    top: 50px;
-    left: 100px;
+    left: 50%;
+    bottom: 50px;
+    transform: translate(-50%, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: all .3s ease .3s;
+    .picker-materials {
+        opacity: 0;
+        transition: all .3s ease .3s;
+    }
+    &.active {
+        opacity: 1;
+        .picker-materials {
+            opacity: 1;
+        }
+    }
+    &-materials {
+        display: flex;
+    }
+    h1 {
+        font-weight: 600;
+    }
+}
+
+.material {
+    width: 100px;
+    height: 100px;
 }

@@ -17,12 +17,11 @@ export default function Picker() {
     };
 
     return (
-        <div className="picker" style={{ display: target ? 'block' : 'none' }}>
+        <div className={target ? 'picker active' : 'picker'}>
             {/* <HexColorPicker color={itemColor} onChange={handleColorChange} /> */}
             <h1>{target}</h1>
             {/* {itemColor} */}
-
-            <div style={{ width: '100px', height: '100px' }}>
+            <div className='picker-materials'>
                 {selectedItem && <Materials part={selectedItem} />}
             </div>
         </div>

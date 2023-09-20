@@ -3,6 +3,13 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader'
 
 const DataMaterials = () => {
   const materials = {
+    gravel: {
+      aoMap: useLoader(TextureLoader, 'materials/gravel/ambientOcclusion.jpg'),
+      roughnessMap: useLoader(TextureLoader, 'materials/gravel/roughness.jpg'),
+      normalMap: useLoader(TextureLoader, 'materials/gravel/normal.jpg'),
+      baseColorMap: useLoader(TextureLoader, 'materials/gravel/baseColor.jpg'),
+      diplacementMap: useLoader(TextureLoader, 'materials/gravel/height.png'),
+    },
     fabric: {
       aoMap: useLoader(TextureLoader, 'materials/fabric/ambientOcclusion.jpg'),
       roughnessMap: useLoader(TextureLoader, 'materials/fabric/roughness.jpg'),

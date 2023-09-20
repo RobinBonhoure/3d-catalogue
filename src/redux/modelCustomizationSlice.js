@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
+import partsMaterials from '../data/partsMaterials'; // Import your partsMaterials object
 
 // Define your dynamic item list
-// const itemList = ['laces', 'mesh', 'caps', 'inner', 'sole', 'stripes', 'band', 'patch'];
 const itemList = ['comp_desk_c', 'comp_desk', 'comp_desk_b', 'comp_desk_a', 'comp_desk_2remote', 'comp_desk_1remote', 'comp_desk_button', 'comp_desk_remote', 'comp_desk_top'];
 
-// Create an initial state object dynamically based on the item list
+// Create an initial state object dynamically based on the item list and default materials
 const initialState = {
   current: null,
   items: itemList.reduce((itemsObj, item) => {
     itemsObj[item] = {
       color: '',
-      material: 'wood',
+      material: partsMaterials[item]?.default || '', // Initialize with the default material from partsMaterials
     };
     return itemsObj;
   }, {}),

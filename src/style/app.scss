@@ -21,6 +21,20 @@
     .picker-materials {
         opacity: 0;
         transition: all .3s ease .3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        .material {
+            width: 60px;
+            height: 60px;
+            border-radius: 100vmax;
+            border: 3px solid #00ff0000;
+            transition: all .3s ease;
+            &.active {
+                border: 3px solid #00ff0080;
+            }
+        }
     }
     &.active {
         opacity: 1;
@@ -34,9 +48,4 @@
     h1 {
         font-weight: 600;
     }
-}
-
-.material {
-    width: 100px;
-    height: 100px;
 }

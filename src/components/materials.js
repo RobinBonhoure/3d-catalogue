@@ -7,64 +7,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setItemMaterial } from '../redux/modelCustomizationSlice'
 
 import dataMaterials from '../data/dataMaterials';
-
-
-const partsMaterials = {
-    comp_desk_c: {
-        metal: true,
-        fabric: true,
-        wood: true,
-        gravel: true
-    },
-    comp_desk: {
-        metal: true,
-        fabric: true,
-        wood: true
-    },
-    comp_desk_b: {
-        metal: true,
-        fabric: true,
-        wood: true
-    },
-    comp_desk_a: {
-        metal: true,
-        fabric: true,
-        wood: true
-    },
-    comp_desk_2remote: {
-        metal: true,
-        fabric: true,
-        wood: true
-    },
-    comp_desk_1remote: {
-        metal: true,
-        fabric: true,
-        wood: true
-    },
-    comp_desk_button: {
-        metal: true,
-        fabric: true,
-        wood: true
-    },
-    comp_desk_remote: {
-        metal: true,
-        fabric: true,
-        wood: true
-    },
-    comp_desk_top: {
-        metal: true,
-        fabric: true,
-        wood: true,
-        gravel: true
-    },
-}
-
-
-
+import partsMaterials from '../data/partsMaterials';
 
 export default function Materials({ part }) {
-
-
 
     const dispatch = useDispatch();
     const target = useSelector((state) => state.modelCustomization.current);
@@ -73,27 +18,28 @@ export default function Materials({ part }) {
         dispatch(setItemMaterial({ item: target, material }));
     };
 
+    const actualMaterial = useSelector((state) => state.modelCustomization.items[target]?.material);
+    console.log(actualMaterial)
+
     const allMaterials = dataMaterials();
-    console.log(allMaterials.wood.baseColorMap)
 
     const [hovered, setHovered] = useState(false);
     useCursor(hovered)
 
     // if (part === null) return null;
-    const partMaterial = Object.keys(partsMaterials[part]).filter(key => partsMaterials[part][key]);
+    const partMaterials = partsMaterials[part].all;
 
     return (
         <>
-            {partMaterial.map((material, index) => {
-                console.log(material)
+            {partMaterials.map((material, index) => {
                 return (
-                    <div key={index} className="material">
+                    <div key={index} className={material === actualMaterial ? 'material active' : 'material'}>
                         <Canvas>
                             <ambientLight intensity={0.5} />
                             <pointLight position={[10, 10, 10]} />
                             <Suspense fallback={null}>
                                 <Sphere
-                                    args={[2, 32, 32]}
+                                    args={[3, 32, 32]}
                                     onPointerOver={() => setHovered(true)}
                                     onPointerOut={() => setHovered(false)}
                                     onClick={() => handleMaterialChange(material)}

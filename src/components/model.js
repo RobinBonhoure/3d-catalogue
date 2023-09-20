@@ -3,7 +3,7 @@ import { setCurrent } from '../redux/modelCustomizationSlice'
 import { setAOMapMaterial } from '../redux/materialsSlice';
 import { useDrag } from 'react-use-gesture'
 import { useSelector, useDispatch } from 'react-redux'
-import { Center, Resize, useGLTF, useCursor } from "@react-three/drei"
+import { Center, Resize, useGLTF, useCursor, useAnimations } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 
 import dataMaterials from '../data/dataMaterials';
@@ -19,11 +19,17 @@ export default function Model() {
     const [hovered, set] = useState(null);
     const dispatch = useDispatch();
     // const { nodes, materials } = useGLTF('shoe-draco.glb');
-    const { nodes, materials } = useGLTF('desk.glb');
+
+    const { nodes, materials, animations } = useGLTF('desk.glb');
+    const { actions, names } = useAnimations(animations);
+    console.log(actions,names)
+
     const allMaterials = dataMaterials();
     useCursor(hovered);
 
-    console.log(allMaterials);
+    useEffect(() => {
+        actions[names[0]].play(); // Replace 'YourAnimationName' with your animation name
+    }, []);
 
     useFrame((state) => {
         // ref.current.rotation.x = lerp(
@@ -64,10 +70,7 @@ export default function Model() {
         }
     };
 
-    console.log(materials.comp_desk_top.map, allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.baseColorMap)])
-
     return (
-
         <Resize
             ref={ref} scale={2}>
             <Center>
@@ -83,77 +86,77 @@ export default function Model() {
                     <group rotation={[Math.PI / 2, 0, 0]}>
 
                         <mesh geometry={nodes.Object_4.geometry} material={materials.comp_desk_c}
-                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.aoMap)]}
-                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.roughnessMap)]}
-                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.normalMap)]}
-                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.baseColorMap)]}
+                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.material)].aoMap}
+                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.material)].roughnessMap}
+                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.material)].normalMap}
+                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.material)].baseColorMap}
                         />
 
 
                         <mesh geometry={nodes.Object_5.geometry} material={materials.comp_desk}
-                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk.aoMap)]}
-                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk.roughnessMap)]}
-                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk.normalMap)]}
-                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk.baseColorMap)]}
+                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk.material)].aoMap}
+                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk.material)].roughnessMap}
+                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk.material)].normalMap}
+                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk.material)].baseColorMap}
                         />
 
 
                         <mesh geometry={nodes.Object_6.geometry} material={materials.comp_desk_b}
-                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.aoMap)]}
-                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.roughnessMap)]}
-                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.normalMap)]}
-                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.baseColorMap)]}
+                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].aoMap}
+                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].roughnessMap}
+                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].normalMap}
+                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].baseColorMap}
                         />
 
 
                         <mesh geometry={nodes.Object_7.geometry} material={materials.comp_desk_a}
-                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.aoMap)]}
-                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.roughnessMap)]}
-                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.normalMap)]}
-                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.baseColorMap)]}
+                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].aoMap}
+                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].roughnessMap}
+                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].normalMap}
+                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].baseColorMap}
                         />
 
                     </group>
                     <group rotation={[Math.PI / 2, 0, 0]}>
 
                         <mesh geometry={nodes.Object_10.geometry} material={materials.comp_desk_2remote}
-                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.aoMap)]}
-                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.roughnessMap)]}
-                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.normalMap)]}
-                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.baseColorMap)]}
+                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.material)].aoMap}
+                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.material)].roughnessMap}
+                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.material)].normalMap}
+                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.material)].baseColorMap}
                         />
 
 
                         <mesh geometry={nodes.Object_11.geometry} material={materials.comp_desk_1remote}
-                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_1remote.aoMap)]}
-                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_1remote.roughnessMap)]}
-                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_1remote.normalMap)]}
-                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_1remote.baseColorMap)]}
+                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_1remote.material)].aoMap}
+                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_1remote.material)].roughnessMap}
+                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_1remote.material)].normalMap}
+                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_1remote.material)].baseColorMap}
                         />
 
 
                         <mesh geometry={nodes.Object_12.geometry} material={materials.comp_desk_button}
-                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_button.aoMap)]}
-                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_button.roughnessMap)]}
-                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_button.normalMap)]}
-                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_button.baseColorMap)]}
+                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_button.material)].aoMap}
+                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_button.material)].roughnessMap}
+                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_button.material)].normalMap}
+                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_button.material)].baseColorMap}
                         />
 
 
                         <mesh geometry={nodes.Object_9.geometry} material={materials.comp_desk_remote}
-                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_remote.aoMap)]}
-                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_remote.roughnessMap)]}
-                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_remote.normalMap)]}
-                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_remote.baseColorMap)]}
+                            material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_remote.material)].aoMap}
+                            material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_remote.material)].roughnessMap}
+                            material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_remote.material)].normalMap}
+                            material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_remote.material)].baseColorMap}
                         />
 
                     </group>
 
                     <mesh geometry={nodes.Object_14.geometry} material={materials.comp_desk_top}
-                        material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.aoMap)]}
-                        material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.roughnessMap)]}
-                        material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.normalMap)]}
-                        material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.baseColorMap)]}
+                        material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].aoMap}
+                        material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].roughnessMap}
+                        material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].normalMap}
+                        material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].baseColorMap}
                     />
 
                 </group>

@@ -18,10 +18,11 @@ fs.readFile(inputFile, 'utf8', (err, data) => {
     const updatedData = data.replace(meshRegex, (match, meshName, materialName) => {
       return `
         <mesh geometry={nodes.${meshName}.geometry} material={materials.${materialName}}
-          material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.${materialName}.aoMap)]}
-          material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.${materialName}.roughnessMap)]}
-          material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.${materialName}.normalMap)]}
-          material-map={allMaterials[useSelector((state) => state.modelCustomization.items.${materialName}.baseColorMap)]}
+          material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.${materialName}.material)].aoMap}
+          material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.${materialName}.material)].roughnessMap}
+          material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.${materialName}.material)].normalMap}
+          material-map={allMaterials[useSelector((state) => state.modelCustomization.items.${materialName}.material)].baseColorMap}
+          material-metalnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.${materialName}.material)].metalnessMap}
         />
       `;
     });

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import partsMaterials from '../data/partsMaterials'; // Import your partsMaterials object
 
 // Define your dynamic item list
-const itemList = ['comp_desk_c', 'comp_desk', 'comp_desk_b', 'comp_desk_a', 'comp_desk_2remote', 'comp_desk_1remote', 'comp_desk_button', 'comp_desk_remote', 'comp_desk_top'];
+const itemList = Object.keys(partsMaterials);
 
 // Create an initial state object dynamically based on the item list and default materials
 const initialState = {

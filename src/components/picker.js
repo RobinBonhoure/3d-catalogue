@@ -13,6 +13,7 @@ export default function Picker() {
     const itemColor = useSelector((state) => state.modelCustomization.items[target]?.color);
 
     const handleColorChange = (color) => {
+        if (!target) return;
         dispatch(setItemColor({ item: target, color }));
     };
 

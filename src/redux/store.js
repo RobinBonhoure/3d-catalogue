@@ -1,12 +1,12 @@
 // store.js
 import { configureStore } from '@reduxjs/toolkit';
 import modelCustomizationReducer from './modelCustomizationSlice';
-import materialsReducer from './materialsSlice';
+import positionReducer from './positionSlice';
 
 const store = configureStore({
   reducer: {
     modelCustomization: modelCustomizationReducer,
-    materials: materialsReducer,
+    position: positionReducer,
   },
 });
 

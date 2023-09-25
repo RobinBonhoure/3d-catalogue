@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { setCurrent } from '../redux/modelCustomizationSlice'
-import { setAOMapMaterial } from '../redux/materialsSlice';
 import { useDrag } from 'react-use-gesture'
 import { useSelector, useDispatch } from 'react-redux'
 import { Center, Resize, useGLTF, useCursor, useAnimations } from "@react-three/drei"
@@ -12,36 +11,62 @@ function lerp(v0, v1, t) {
     return v0 * (1 - t) + v1 * t
 }
 
-let dragRotation = { x: 0, y: 0 }
+let dragRotation = { x: 0.1, y: 0 }
+
+let modelScale = 2;
 
 export default function Model() {
     const ref = useRef();
+    const plateau = useRef();
+    const groupe = useRef();
+    const pieds = useRef();
+    const cales = useRef();
+    const objectToanimate = [plateau, groupe, pieds, cales];
     const [hovered, set] = useState(null);
     const dispatch = useDispatch();
-    // const { nodes, materials } = useGLTF('shoe-draco.glb');
+    const isPositionUp = useSelector((state) => state.position);
 
-    const { nodes, materials, animations } = useGLTF('desk.glb');
-    const { actions, names } = useAnimations(animations);
-    console.log(actions,names)
+    const { nodes, materials } = useGLTF('desk.glb');
 
     const allMaterials = dataMaterials();
     useCursor(hovered);
 
     useEffect(() => {
-        actions[names[0]].play(); // Replace 'YourAnimationName' with your animation name
+        const handleResize = () => {
+            modelScale = Math.min(2 * window.innerWidth / window.innerHeight, 2);
+        }
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
     useFrame((state) => {
-        // ref.current.rotation.x = lerp(
-        //     ref.current.rotation.x,
-        //     dragRotation.x,
-        //     0.1
-        // );
+        ref.current.rotation.x = lerp(
+            ref.current.rotation.x,
+            dragRotation.x,
+            0.1
+        );
         ref.current.rotation.y = lerp(
             ref.current.rotation.y,
             dragRotation.y,
             0.1
         );
+        objectToanimate.forEach(object => {
+            if (isPositionUp) {
+                if (object === pieds || object === cales) {
+                    object.current.position.z = lerp(object.current.position.z, -0.15, 0.02);
+                } else {
+                    object.current.position.y = lerp(object.current.position.y, 0.15, 0.02);
+                }
+            } else {
+                if (object === pieds || object === cales) {
+                    object.current.position.z = lerp(object.current.position.z, 0, 0.02);
+                } else {
+                    object.current.position.y = lerp(object.current.position.y, 0, 0.02);
+                }
+            }
+        });
     });
 
     const [isDragging, setIsDragging] = useState(false);
@@ -72,7 +97,7 @@ export default function Model() {
 
     return (
         <Resize
-            ref={ref} scale={2}>
+            ref={ref} scale={modelScale}>
             <Center>
                 <group
                     dispose={null}
@@ -101,7 +126,7 @@ export default function Model() {
                         />
 
 
-                        <mesh geometry={nodes.Object_6.geometry} material={materials.comp_desk_b}
+                        <mesh ref={pieds} geometry={nodes.Object_6.geometry} material={materials.comp_desk_b}
                             material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].aoMap}
                             material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].roughnessMap}
                             material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].normalMap}
@@ -109,7 +134,7 @@ export default function Model() {
                         />
 
 
-                        <mesh geometry={nodes.Object_7.geometry} material={materials.comp_desk_a}
+                        <mesh ref={cales} geometry={nodes.Object_7.geometry} material={materials.comp_desk_a}
                             material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].aoMap}
                             material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].roughnessMap}
                             material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].normalMap}
@@ -117,7 +142,7 @@ export default function Model() {
                         />
 
                     </group>
-                    <group rotation={[Math.PI / 2, 0, 0]}>
+                    <group ref={groupe} rotation={[Math.PI / 2, 0, 0]}>
 
                         <mesh geometry={nodes.Object_10.geometry} material={materials.comp_desk_2remote}
                             material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.material)].aoMap}
@@ -152,98 +177,15 @@ export default function Model() {
 
                     </group>
 
-                    <mesh geometry={nodes.Object_14.geometry} material={materials.comp_desk_top}
+                    <mesh ref={plateau} geometry={nodes.Object_14.geometry} material={materials.comp_desk_top}
                         material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].aoMap}
                         material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].roughnessMap}
                         material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].normalMap}
                         material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].baseColorMap}
+                        material-color={useSelector((state) => state.modelCustomization.items.comp_desk_top.color)}
                     />
-
                 </group>
             </Center>
         </Resize>
-        // <group
-        //     ref={ref}
-        //     dispose={null}
-        //     onPointerOver={(e) => (e.stopPropagation(), set(e.object.material.name))}
-        //     onPointerOut={(e) => e.intersections.length === 0 && set(null)}
-        //     onPointerMissed={() => dispatch(setCurrent(null))}
-        //     onPointerDown={handlePointerDown}
-        //     onClick={handleClick}
-        //     {...dragBind()}
-        // >
-        //     <mesh
-        //         geometry={nodes.shoe.geometry}
-        //         material={materials.laces}
-        //         material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.laces.material)].aoMap}
-        //         material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.laces.material)].roughnessMap}
-        //         material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.laces.material)].normalMap}
-        //         material-map={allMaterials[useSelector((state) => state.modelCustomization.items.laces.material)].baseColorMap}
-        //         // material-color={useSelector((state) => state.modelCustomization.items.laces.color)}
-        //     />
-        //     <mesh
-        //         geometry={nodes.shoe_1.geometry}
-        //         material={materials.mesh}
-        //         material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.mesh.material)].aoMap}
-        //         material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.mesh.material)].roughnessMap}
-        //         material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.mesh.material)].normalMap}
-        //         material-map={allMaterials[useSelector((state) => state.modelCustomization.items.mesh.material)].baseColorMap}
-        //         // material-color={useSelector((state) => state.modelCustomization.items.mesh.color)}
-        //     />
-        //     <mesh
-        //         geometry={nodes.shoe_2.geometry}
-        //         material={materials.caps}
-        //         material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.caps.material)].aoMap}
-        //         material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.caps.material)].roughnessMap}
-        //         material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.caps.material)].normalMap}
-        //         material-map={allMaterials[useSelector((state) => state.modelCustomization.items.caps.material)].baseColorMap}
-        //         // material-color={useSelector((state) => state.modelCustomization.items.caps.color)}
-        //     />
-        //     <mesh
-        //         geometry={nodes.shoe_3.geometry}
-        //         material={materials.inner}
-        //         material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.inner.material)].aoMap}
-        //         material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.inner.material)].roughnessMap}
-        //         material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.inner.material)].normalMap}
-        //         material-map={allMaterials[useSelector((state) => state.modelCustomization.items.inner.material)].baseColorMap}
-        //         // material-color={useSelector((state) => state.modelCustomization.items.inner.color)}
-        //     />
-        //     <mesh
-        //         geometry={nodes.shoe_4.geometry}
-        //         material={materials.sole}
-        //         material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.sole.material)].aoMap}
-        //         material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.sole.material)].roughnessMap}
-        //         material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.sole.material)].normalMap}
-        //         material-map={allMaterials[useSelector((state) => state.modelCustomization.items.sole.material)].baseColorMap}
-        //         // material-color={useSelector((state) => state.modelCustomization.items.sole.color)}
-        //     />
-        //     <mesh
-        //         geometry={nodes.shoe_5.geometry}
-        //         material={materials.stripes}
-        //         material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.stripes.material)].aoMap}
-        //         material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.stripes.material)].roughnessMap}
-        //         material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.stripes.material)].normalMap}
-        //         material-map={allMaterials[useSelector((state) => state.modelCustomization.items.stripes.material)].baseColorMap}
-        //         // material-color={useSelector((state) => state.modelCustomization.items.stripes.color)}
-        //     />
-        //     <mesh
-        //         geometry={nodes.shoe_6.geometry}
-        //         material={materials.band}
-        //         material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.band.material)].aoMap}
-        //         material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.band.material)].roughnessMap}
-        //         material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.band.material)].normalMap}
-        //         material-map={allMaterials[useSelector((state) => state.modelCustomization.items.band.material)].baseColorMap}
-        //         // material-color={useSelector((state) => state.modelCustomization.items.band.color)}
-        //     />
-        //     <mesh
-        //         geometry={nodes.shoe_7.geometry}
-        //         material={materials.patch}
-        //         material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.patch.material)].aoMap}
-        //         material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.patch.material)].roughnessMap}
-        //         material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.patch.material)].normalMap}
-        //         material-map={allMaterials[useSelector((state) => state.modelCustomization.items.patch.material)].baseColorMap}
-        //         // material-color={useSelector((state) => state.modelCustomization.items.patch.color)}
-        //     />
-        // </group>
     );
 }

@@ -1,12 +1,13 @@
 "use client"
 
-import React, { Suspense } from 'react'
+import React, { Suspense, useState, useEffect } from 'react'
 import { Canvas } from "@react-three/fiber"
 import { ContactShadows, Environment } from "@react-three/drei"
 
 import Picker from '../components/picker'
 import Model from '../components/model'
 import Ground from '../components/ground'
+import UpDown from '../components/updown'
 
 
 export default function App() {
@@ -14,7 +15,8 @@ export default function App() {
     <>
       <div className="canvas-container">
         <Picker />
-        <Canvas shadows pixelratio={[1, 1.5]} camera={{ position: [0, 0.5, 2.75] }}>
+        <UpDown />
+        <Canvas shadows pixelratio={[1, 1.5]} camera={{ position: [0, 1, 2] }}>
           <ambientLight intensity={0.3} />
           <spotLight castShadow intensity={0.3} angle={0.1} penumbra={1} position={[5, 25, 20]} />
           <Suspense fallback={null}>

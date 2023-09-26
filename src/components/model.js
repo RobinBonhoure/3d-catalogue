@@ -27,7 +27,6 @@ export default function Model() {
     const isPositionUp = useSelector((state) => state.position);
 
     const { nodes, materials } = useGLTF('desk.glb');
-    console.log(materials);
 
     const allMaterials = dataMaterials();
     useCursor(hovered);

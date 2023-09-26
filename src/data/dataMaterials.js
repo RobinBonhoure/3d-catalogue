@@ -4,19 +4,19 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader'
 const DataMaterials = () => {
   const materials = {
     wood: {
-      aoMap: useLoader(TextureLoader, 'materials/wood/ambientOcclusion.jpg'),
-      roughnessMap: useLoader(TextureLoader, 'materials/wood/roughness.jpg'),
-      normalMap: useLoader(TextureLoader, 'materials/wood/normal.jpg'),
-      baseColorMap: useLoader(TextureLoader, 'materials/wood/basecolor.jpg'),
+      aoMap: useLoader(TextureLoader, './images/wood/ambientOcclusion.jpg'),
+      roughnessMap: useLoader(TextureLoader, './images/wood/roughness.jpg'),
+      normalMap: useLoader(TextureLoader, './images/wood/normal.jpg'),
+      baseColorMap: useLoader(TextureLoader, './images/wood/basecolor.jpg'),
       metalnessMap: null,
       metalness: 0,
     },
     metal: {
-      aoMap: useLoader(TextureLoader, 'materials/metal/ambientOcclusion.jpg'),
-      roughnessMap: useLoader(TextureLoader, 'materials/metal/roughness.jpg'),
-      normalMap: useLoader(TextureLoader, 'materials/metal/normal.jpg'),
-      baseColorMap: useLoader(TextureLoader, 'materials/metal/basecolor.jpg'),
-      metalnessMap: useLoader(TextureLoader, 'materials/metal/metallic.jpg'),
+      aoMap: useLoader(TextureLoader, './images/metal/ambientOcclusion.jpg'),
+      roughnessMap: useLoader(TextureLoader, './images/metal/roughness.jpg'),
+      normalMap: useLoader(TextureLoader, './images/metal/normal.jpg'),
+      baseColorMap: useLoader(TextureLoader, './images/metal/basecolor.jpg'),
+      metalnessMap: useLoader(TextureLoader, './images/metal/metallic.jpg'),
       metalness: 1,
     },
   };

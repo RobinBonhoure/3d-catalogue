@@ -21,9 +21,9 @@ export default function App() {
           <spotLight castShadow intensity={0.3} angle={0.1} penumbra={1} position={[5, 25, 20]} />
           <Suspense fallback={null}>
             <Model castShadow receiveShadow />
-            {/* <Ground receiveShadow /> */}
+            {/* <Ground /> */}
             <Environment files="royal_esplanade_1k.hdr" />
-            <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.5, 0]} opacity={0.3} width={1} height={1} blur={2} far={1} />
+            {/* <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.5, 0]} opacity={0.3} width={1} height={1} blur={2} far={1} /> */}
           </Suspense>
         </Canvas>
       </div>

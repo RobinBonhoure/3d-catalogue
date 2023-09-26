@@ -11,7 +11,7 @@ function lerp(v0, v1, t) {
     return v0 * (1 - t) + v1 * t
 }
 
-let dragRotation = { x: 0.1, y: 0 }
+let dragRotation = { x: 0, y: 0 }
 
 let modelScale = 2;
 
@@ -27,6 +27,7 @@ export default function Model() {
     const isPositionUp = useSelector((state) => state.position);
 
     const { nodes, materials } = useGLTF('desk.glb');
+    console.log(materials);
 
     const allMaterials = dataMaterials();
     useCursor(hovered);
@@ -115,6 +116,8 @@ export default function Model() {
                             material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.material)].roughnessMap}
                             material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.material)].normalMap}
                             material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.material)].baseColorMap}
+                            material-metalnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.material)].metalnessMap}
+                            material-metalness={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_c.material)].metalness}
                         />
 
 
@@ -123,6 +126,8 @@ export default function Model() {
                             material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk.material)].roughnessMap}
                             material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk.material)].normalMap}
                             material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk.material)].baseColorMap}
+                            material-metalnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk.material)].metalnessMap}
+                            material-metalness={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk.material)].metalness}
                         />
 
 
@@ -131,6 +136,8 @@ export default function Model() {
                             material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].roughnessMap}
                             material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].normalMap}
                             material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].baseColorMap}
+                            material-metalnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].metalnessMap}
+                            material-metalness={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].metalness}
                         />
 
 
@@ -139,6 +146,8 @@ export default function Model() {
                             material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].roughnessMap}
                             material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].normalMap}
                             material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].baseColorMap}
+                            material-metalnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].metalnessMap}
+                            material-metalness={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].metalness}
                         />
 
                     </group>
@@ -149,6 +158,8 @@ export default function Model() {
                             material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.material)].roughnessMap}
                             material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.material)].normalMap}
                             material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.material)].baseColorMap}
+                            material-metalnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.material)].metalnessMap}
+                            material-metalness={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.material)].metalness}
                         />
 
 
@@ -157,6 +168,8 @@ export default function Model() {
                             material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_1remote.material)].roughnessMap}
                             material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_1remote.material)].normalMap}
                             material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_1remote.material)].baseColorMap}
+                            material-metalnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_1remote.material)].metalnessMap}
+                            material-metalness={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_1remote.material)].metalness}
                         />
 
 
@@ -165,6 +178,8 @@ export default function Model() {
                             material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_button.material)].roughnessMap}
                             material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_button.material)].normalMap}
                             material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_button.material)].baseColorMap}
+                            material-metalnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_button.material)].metalnessMap}
+                            material-metalness={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_button.material)].metalness}
                         />
 
 
@@ -173,6 +188,8 @@ export default function Model() {
                             material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_remote.material)].roughnessMap}
                             material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_remote.material)].normalMap}
                             material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_remote.material)].baseColorMap}
+                            material-metalnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_remote.material)].metalnessMap}
+                            material-metalness={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_remote.material)].metalness}
                         />
 
                     </group>
@@ -182,6 +199,8 @@ export default function Model() {
                         material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].roughnessMap}
                         material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].normalMap}
                         material-map={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].baseColorMap}
+                        material-metalnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].metalnessMap}
+                        material-metalness={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].metalness}
                         material-color={useSelector((state) => state.modelCustomization.items.comp_desk_top.color)}
                     />
                 </group>

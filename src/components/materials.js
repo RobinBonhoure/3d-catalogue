@@ -19,7 +19,6 @@ export default function Materials({ part }) {
     };
 
     const actualMaterial = useSelector((state) => state.modelCustomization.items[target]?.material);
-    console.log(actualMaterial)
 
     const allMaterials = dataMaterials();
 
@@ -52,7 +51,7 @@ export default function Materials({ part }) {
                                         normalMap={allMaterials[material].normalMap}
                                         map={allMaterials[material].baseColorMap}
                                         metalnessMap={allMaterials[material].metalnessMap}
-                                        displacementMap={allMaterials[material].displacementMap}
+                                        metalness={allMaterials[material].metalness / 1.2}
                                     />
                                 </Sphere>
                             </Suspense>

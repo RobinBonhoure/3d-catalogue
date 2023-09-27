@@ -25,6 +25,7 @@ export default function Model() {
                         width={100}
                         height={100}
                         alt="arrow"
+                        priority={true}
                     />
                 </div>
                 <div onClick={handlePositionDown}>
@@ -34,6 +35,7 @@ export default function Model() {
                         width={100}
                         height={100}
                         alt="arrow"
+                        priority={true}
                     />
                 </div>
             </div>

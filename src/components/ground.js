@@ -1,23 +1,17 @@
 import React from 'react';
-import { MeshStandardMaterial } from 'three';
+import { Plane } from '@react-three/drei';
 
 const Ground = () => {
-  const groundMaterial = new MeshStandardMaterial({
-    color: 'white', // You can change the color to your preference
-    transparent: false, // Make the material transparent
-    opacity: 1, // Adjust the opacity level as needed
-    roughness: 0.7, // Adjust roughness as needed
-    metalness: 0.2, // Adjust metalness as needed
-  });
   return (
-    <mesh
-      material={groundMaterial}
-      position={[0, -1, 0]}
-      receiveShadow
-      rotation={[-0.5 * Math.PI, 0, 0]}
+    <Plane
+      receiveShadow={true}
+      // rotation={[-Math.PI / 2, 0, 0]}
+      position={[0, 0, 0]}
+      args={[1000, 1000]}
     >
-      <planeGeometry args={[5000, 5000, 1, 1]} />
-    </mesh>
+      <meshStandardMaterial attach="material" color="red" />
+      <shadowMaterial attach="material" opacity={1} />
+    </Plane>
   )
 };
 

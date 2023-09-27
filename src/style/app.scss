@@ -21,10 +21,10 @@ canvas {
     justify-content: center;
     flex-direction: column;
     opacity: 0;
-    transition: all .3s ease .3s;
+    transition: all 0.3s ease 0.3s;
     .picker-materials {
         opacity: 0;
-        transition: all .3s ease .3s;
+        transition: all 0.3s ease 0.3s;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -34,7 +34,7 @@ canvas {
             height: 60px;
             border-radius: 100vmax;
             border: 3px solid #00ff0000;
-            transition: all .3s ease;
+            transition: all 0.3s ease;
             &.active {
                 border: 3px solid #00ff0080;
             }
@@ -68,5 +68,52 @@ canvas {
     }
     .arrow-bottom {
         transform: rotate(180deg);
+    }
+}
+
+.loader {
+    background-color: rgb(255, 255, 255);
+    color: rgb(71, 71, 71);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    transition: all .6s ease .6s;
+    opacity: 0;
+    pointer-events: none;
+    &.active {
+        transition: all .3s ease;
+        opacity: 1;
+        pointer-events: all;
+    }
+    .loading-bar {
+        will-change: transform;
+        background-color: rgb(71, 71, 71);
+        width: 100%;
+        transform: scaleX(0);
+        transform-origin: top left;
+        height: 5px;
+        z-index: 1;
+        border-radius: 100vmax;
+        transition:
+            transform 0s,
+            opacity 1s ease;
+        &_container {
+            overflow: hidden;
+            z-index: 0;
+            background-color: rgba(209, 209, 209, 0.5);
+            width: 30%;
+            border-radius: 100vmax;
+            height: 5px;
+            top: 50%;
+            transition: all 0.3s ease;
+        }
     }
 }

@@ -28,8 +28,6 @@ export default function Model() {
 
     const { nodes, materials } = useGLTF('desk.glb');
 
-    console.log(materials);
-
     const allMaterials = dataMaterials();
     useCursor(hovered);
 
@@ -54,21 +52,21 @@ export default function Model() {
             dragRotation.y,
             0.1
         );
-        // objectToanimate.forEach(object => {
-        //     if (isPositionUp) {
-        //         if (object === pieds || object === cales) {
-        //             object.current.position.z = lerp(object.current.position.z, -0.15, 0.02);
-        //         } else {
-        //             object.current.position.y = lerp(object.current.position.y, 0.15, 0.02);
-        //         }
-        //     } else {
-        //         if (object === pieds || object === cales) {
-        //             object.current.position.z = lerp(object.current.position.z, 0, 0.02);
-        //         } else {
-        //             object.current.position.y = lerp(object.current.position.y, 0, 0.02);
-        //         }
-        //     }
-        // });
+        objectToanimate.forEach(object => {
+            if (isPositionUp) {
+                if (object === pieds || object === cales) {
+                    object.current.position.z = lerp(object.current.position.z, -0.15, 0.02);
+                } else {
+                    object.current.position.y = lerp(object.current.position.y, 0.15, 0.02);
+                }
+            } else {
+                if (object === pieds || object === cales) {
+                    object.current.position.z = lerp(object.current.position.z, 0, 0.02);
+                } else {
+                    object.current.position.y = lerp(object.current.position.y, 0, 0.02);
+                }
+            }
+        });
     });
 
     const [isDragging, setIsDragging] = useState(false);
@@ -226,7 +224,7 @@ export default function Model() {
                         />
 
 
-                        <mesh geometry={nodes.Object_6.geometry} material={materials.comp_desk_b}
+                        <mesh ref={pieds} geometry={nodes.Object_6.geometry} material={materials.comp_desk_b}
                             material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].aoMap}
                             material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].roughnessMap}
                             material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_b.material)].normalMap}
@@ -236,7 +234,7 @@ export default function Model() {
                         />
 
 
-                        <mesh geometry={nodes.Object_7.geometry} material={materials.comp_desk_a}
+                        <mesh ref={cales} geometry={nodes.Object_7.geometry} material={materials.comp_desk_a}
                             material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].aoMap}
                             material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].roughnessMap}
                             material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_a.material)].normalMap}
@@ -246,7 +244,7 @@ export default function Model() {
                         />
 
                     </group>
-                    <group rotation={[Math.PI / 2, 0, 0]}>
+                    <group ref={groupe} rotation={[Math.PI / 2, 0, 0]}>
 
                         <mesh geometry={nodes.Object_10.geometry} material={materials.comp_desk_2remote}
                             material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_2remote.material)].aoMap}
@@ -289,7 +287,7 @@ export default function Model() {
 
                     </group>
 
-                    <mesh geometry={nodes.Object_14.geometry} material={materials.comp_desk_top}
+                    <mesh ref={plateau} geometry={nodes.Object_14.geometry} material={materials.comp_desk_top}
                         material-aoMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].aoMap}
                         material-roughnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].roughnessMap}
                         material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.comp_desk_top.material)].normalMap}

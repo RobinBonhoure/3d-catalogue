@@ -2,7 +2,8 @@
 
 import React, { Suspense, useState, useEffect } from 'react'
 import { Canvas } from "@react-three/fiber"
-import { Environment, useProgress } from "@react-three/drei"
+import { Perf } from 'r3f-perf'
+import { Environment, useProgress, ContactShadows } from "@react-three/drei"
 
 import Picker from '../components/picker'
 import Loader from '../components/loader'
@@ -19,17 +20,15 @@ export default function App() {
         <Loader progress={progress} />
         <Picker />
         <UpDown />
-        <Canvas shadowMap shadows={true} pixelratio={[1, 1.5]} camera={{ position: [0, 1, 2] }}>
-          <ambientLight intensity={0.3} />
-          <directionalLight
-            position={[0, 10, 0]}
-            intensity={1.5}
-            castShadow={true}
-          />
+        <Canvas shadows camera={{ position: [0, 1, 2] }}>
+          {/* <Perf position="top-left" /> */}
+          <directionalLight castShadow position={[10, 20, 10]} intensity={1.5} shadow-normalBias={0.04} />
+          <ambientLight intensity={0.5} />
           <Suspense fallback={false}>
-            <Model castShadow={true} receiveShadow={true} />
+            <Model />
           </Suspense>
-          <Ground receiveShadow={true} />
+          {/* <Ground /> */}
+          {/* <ContactShadows position={[0, -0.4, 0]} opacity={1} scale={10} blur={5} far={2} resolution={256} color="#000000" /> */}
           <Environment files="royal_esplanade_1k.hdr" />
         </Canvas>
       </div>

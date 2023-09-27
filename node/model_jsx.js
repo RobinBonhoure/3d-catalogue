@@ -1,8 +1,8 @@
 const fs = require('fs');
 
 // Define the input and output file paths
-const inputFile = 'src/node/Desk.jsx'; // Replace with your input file path
-const outputFile = 'src/node/new_Desk.jsx'; // Replace with your output file path
+const inputFile = './node/Desk.jsx'; // Replace with your input file path
+const outputFile = './node/new_Desk.jsx'; // Replace with your output file path
 
 // Read the input file
 fs.readFile(inputFile, 'utf8', (err, data) => {
@@ -23,6 +23,7 @@ fs.readFile(inputFile, 'utf8', (err, data) => {
           material-normalMap={allMaterials[useSelector((state) => state.modelCustomization.items.${materialName}.material)].normalMap}
           material-map={allMaterials[useSelector((state) => state.modelCustomization.items.${materialName}.material)].baseColorMap}
           material-metalnessMap={allMaterials[useSelector((state) => state.modelCustomization.items.${materialName}.material)].metalnessMap}
+          material-metalness={allMaterials[useSelector((state) => state.modelCustomization.items.${materialName}.material)].metalness}
         />
       `;
     });

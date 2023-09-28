@@ -30,18 +30,13 @@ export default function Model() {
 
     const allMaterials = dataMaterials();
     useCursor(hovered);
-
-    useEffect(() => {
-        console.log(window.innerWidth);
-        const handleResize = () => {
-            modelScale = Math.min(2 * window.innerWidth / window.innerHeight, 2);
-            console.log(modelScale);
-        }
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+    
+    modelScale = Math.min(2.5 * window.innerWidth / window.innerHeight, 2);
+    
+    const handleResize = () => {
+        modelScale = Math.min(2.5 * window.innerWidth / window.innerHeight, 2);
+    }
+    window.addEventListener('resize', handleResize);
 
     useFrame((state) => {
         ref.current.rotation.x = lerp(

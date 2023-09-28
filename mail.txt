@@ -1,0 +1,6 @@
+Bonjour,
+
+Je suis développeur web et je propose une solution de visualisation 3D de vos modèles de bureaux avec plusieurs fonctionnalités :
+- changer les matériaux/couleurs des pieds, du plateau, ...
+- changer entre les différents modèles de pieds, plateaux, ...
+- animer le modèle pour la position assis debout

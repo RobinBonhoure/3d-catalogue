@@ -20,7 +20,6 @@ export default function App() {
       <div className="canvas-container">
         <Loader progress={progress} />
         <Picker />
-        <UpDown />
         <Canvas shadows camera={{ position: [0, 1, 2] }}>
           {/* <Perf position="top-left" /> */}
           <directionalLight castShadow position={[10, 20, 10]} intensity={1.5} shadow-normalBias={0.04} />

@@ -16,6 +16,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
+    "iconv-lite": "^0.6.3",
     "next": "13.4.19",
     "next-redux-wrapper": "^8.1.0",
     "r3f-perf": "^7.1.2",

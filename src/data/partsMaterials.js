@@ -103,6 +103,34 @@ const partsMaterials = {
             'wood'
         ],
         default: 'metal'
+    },
+    'Flat_black.glossy': {
+        all: [
+            'metal',
+            'wood'
+        ],
+        default: 'metal'
+    },
+    'Material.005': {
+        all: [
+            'metal',
+            'wood'
+        ],
+        default: 'metal'
+    },
+    'Material.022': {
+        all: [
+            'metal',
+            'wood'
+        ],
+        default: 'metal'
+    },
+    'GIGANTLOGO.001': {
+        all: [
+            'metal',
+            'wood'
+        ],
+        default: 'metal'
     }
 };
 

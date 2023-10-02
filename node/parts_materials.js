@@ -15,12 +15,21 @@ fs.readFile(inputFile, 'utf8', (err, data) => {
   }
 
   // Regular expression to find and replace mesh elements with added attributes
-  const meshRegex = /<mesh\s+geometry={nodes\.(\w+)\.geometry}\s+material={materials\.(\w+)}[^>]*\/>/g;
+  const meshRegex1 = /<mesh\s+geometry={nodes\.(\w+)\.geometry}\s+material={materials\.(\w+|\['\w+'\])}\s*(.*?)\s*\/>/g;
+  const meshRegex2 = /<mesh\s+geometry={nodes\.(\w+)\.geometry}\s+material={materials\['([\w.]+)'\]}\s*(.*?)\s*\/>/g;
 
   // Process each match and add keys to the partsMaterials object
-  data.replace(meshRegex, (match, meshName, materialName) => {
+  data.replace(meshRegex1, (match, meshName, materialName) => {
     // Use meshName as the key and set default values
     partsMaterials[materialName] = {
+      all: ["'metal'", "'wood'"],
+      default: "'metal'", // You can modify this default value as needed
+    };
+  });
+
+  data.replace(meshRegex2, (match, meshName, materialName) => {
+    // Use meshName as the key and set default values
+    partsMaterials[`'${materialName}'`] = {
       all: ["'metal'", "'wood'"],
       default: "'metal'", // You can modify this default value as needed
     };

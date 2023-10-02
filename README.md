@@ -28,3 +28,13 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 1. Put model.glb into /public
 2. Put Model.js (the output of gltfjsx) anywhere inside /src
+
+## How to modify with node the jsx
+
+1. Put model.jsx into /node
+2. node ./node/model_jsx.js   
+
+## How to get partsMaterials
+
+1. Put model.jsx into /node
+2. node ./node/parts_materials.js   

@@ -19,12 +19,12 @@ export default function Picker() {
 
     return (
         <div className={target ? 'picker active' : 'picker'}>
-            {/* <HexColorPicker color={itemColor} onChange={handleColorChange} /> */}
+            <HexColorPicker color={itemColor} onChange={handleColorChange} />
             <h1>{target}</h1>
             {/* {itemColor} */}
-            <div className='picker-materials'>
+            {/* <div className='picker-materials'>
                 {selectedItem && <Materials part={selectedItem} />}
-            </div>
+            </div> */}
         </div>
     )
 }

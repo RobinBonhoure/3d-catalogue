@@ -4,3 +4,22 @@ Je suis développeur web et je propose une solution de visualisation 3D de vos m
 - changer les matériaux/couleurs des pieds, du plateau, ...
 - changer entre les différents modèles de pieds, plateaux, ...
 - animer le modèle pour la position assis debout
+- orienter le modèle
+
+Nous pouvons discuter de nouvelles fonctionnalités.
+
+Ici : 3d-catalogue.vercel.app ,
+vous trouverez un test basique sans design où vous pouvez :
+- cliquer sur les différentes parties du bureau afin de choisir entre 2 matériaux
+- orienter le modèle au drag de la souris
+- utiliser les flèche pour changer le bureau de position (assis/debout)
+
+Cette solution est possible si vous disposez déjà de vos modèles numériques 3D.
+
+Nous pouvons en discuter par téléphone au 0646028752.
+Vous pouvez aussi répondre à ce mail.
+
+Bonne journée.
+
+Cordialement,
+Robin Bonhoure

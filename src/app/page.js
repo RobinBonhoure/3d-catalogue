@@ -8,6 +8,7 @@ import { Environment, useProgress, ContactShadows } from "@react-three/drei"
 import Picker from '../components/picker'
 import Loader from '../components/loader'
 import Model from '../components/model'
+import Bike from '../components/bike'
 import Ground from '../components/ground'
 import UpDown from '../components/updown'
 
@@ -25,7 +26,8 @@ export default function App() {
           <directionalLight castShadow position={[10, 20, 10]} intensity={1.5} shadow-normalBias={0.04} />
           <ambientLight intensity={0.5} />
           <Suspense fallback={false}>
-            <Model />
+            {/* <Model /> */}
+            <Bike />
           </Suspense>
           {/* <Ground /> */}
           {/* <ContactShadows position={[0, -0.4, 0]} opacity={1} scale={10} blur={5} far={2} resolution={256} color="#000000" /> */}

@@ -1,41 +1,109 @@
 const partsMaterials = {
-    comp_desk_c: {
-        all: ['metal', 'wood'],
+    glossycolor: {
+        all: [
+            'metal',
+            'wood'
+        ],
         default: 'metal'
     },
-    comp_desk:  {
-        all: ['metal', 'wood'],
+    Flat_black: {
+        all: [
+            'metal',
+            'wood'
+        ],
         default: 'metal'
     },
-    comp_desk_b:  {
-        all: ['metal', 'wood'],
+    Rims: {
+        all: [
+            'metal',
+            'wood'
+        ],
         default: 'metal'
     },
-    comp_desk_a:  {
-        all: ['metal', 'wood'],
+    Rims2: {
+        all: [
+            'metal',
+            'wood'
+        ],
         default: 'metal'
     },
-    comp_desk_2remote:  {
-        all: ['metal', 'wood'],
+    Tires: {
+        all: [
+            'metal',
+            'wood'
+        ],
         default: 'metal'
     },
-    comp_desk_1remote:  {
-        all: ['metal', 'wood'],
+    levers: {
+        all: [
+            'metal',
+            'wood'
+        ],
         default: 'metal'
     },
-    comp_desk_button:  {
-        all: ['metal', 'wood'],
+    bolts: {
+        all: [
+            'metal',
+            'wood'
+        ],
         default: 'metal'
     },
-    comp_desk_remote:  {
-        all: ['metal', 'wood'],
+    Sticky_tape: {
+        all: [
+            'metal',
+            'wood'
+        ],
         default: 'metal'
     },
-    comp_desk_top:  {
-        all: ['metal', 'wood'],
-        default: 'wood'
+    tape: {
+        all: [
+            'metal',
+            'wood'
+        ],
+        default: 'metal'
     },
-}
-
+    bb: {
+        all: [
+            'metal',
+            'wood'
+        ],
+        default: 'metal'
+    },
+    blackdecal: {
+        all: [
+            'metal',
+            'wood'
+        ],
+        default: 'metal'
+    },
+    blackdecal2: {
+        all: [
+            'metal',
+            'wood'
+        ],
+        default: 'metal'
+    },
+    gigantDecal2: {
+        all: [
+            'metal',
+            'wood'
+        ],
+        default: 'metal'
+    },
+    GigantLOGOdecal: {
+        all: [
+            'metal',
+            'wood'
+        ],
+        default: 'metal'
+    },
+    GIGANTLOGO: {
+        all: [
+            'metal',
+            'wood'
+        ],
+        default: 'metal'
+    }
+};
 
 export default partsMaterials;

@@ -37,4 +37,5 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ## How to get partsMaterials
 
 1. Put model.jsx into /node
-2. node ./node/parts_materials.js   
+2. node ./node/parts_materials.js
+
